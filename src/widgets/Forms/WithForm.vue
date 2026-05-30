@@ -75,6 +75,15 @@ function initFormData() {
   }
 }
 
+function resetForm() {
+  if (!prop.fields) return
+
+  prop.fields.fields.forEach((field) => {
+    if (field.type === "checkbox") formData.value[field.model] = false
+    else formData.value[field.model] = ""
+  })
+}
+
 async function submitForm(formEl: FormInstance | undefined) {
   if (!formEl) return
   await formEl.validate((valid) => {
@@ -114,6 +123,7 @@ onBeforeMount(() => {
       <ElButton @click="submitForm(formRef)" type="primary"
         >Отправить форму</ElButton
       >
+      <ElButton @click="resetForm()" type="info">Сбросить</ElButton>
     </div>
   </ElForm>
 </template>

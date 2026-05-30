@@ -15,7 +15,6 @@ function validateField(field: FormField): boolean {
   const value = formData.value[field.model]
   const errorMessages: string[] = []
 
-  // Required валидация
   if (field.required) {
     if (field.type === "checkbox") {
       if (value !== true)
@@ -26,7 +25,6 @@ function validateField(field: FormField): boolean {
     }
   }
 
-  // MinLength валидация для текстовых полей
   if (field.minLength && (field.type === "text" || field.type === "password")) {
     if (value && value.length < field.minLength) {
       errorMessages.push(
@@ -35,7 +33,6 @@ function validateField(field: FormField): boolean {
     }
   }
 
-  // Email валидация
   if (field.type === "email" && value) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(value)) errorMessages.push("Введите корректный email адрес")
